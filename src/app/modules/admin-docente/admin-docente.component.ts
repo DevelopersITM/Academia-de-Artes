@@ -1,28 +1,29 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Cursos } from 'src/app/core/models/cursos.model';
-import { AdminCursosPopupComponent } from './cursos-popup/admin-cursos-popup.component';
+import { Docentes } from 'src/app/core/models/docentes.model';
+import { AdminDocentePopupComponent } from './admin-docente-popup/admin-docente-popup.component';
+
 @Component({
-  selector: 'app-cursos',
-  templateUrl: './cursos.component.html',
-  styleUrls: ['./cursos.component.css']
+  selector: 'app-admin-docente',
+  templateUrl: './admin-docente.component.html',
+  styleUrls: ['./admin-docente.component.css']
 })
-export class CursosComponent implements OnInit {
+export class AdminDocenteComponent implements OnInit {
   readonly width: string = '800px';
   readonly height: string = '400px'; 
   filterPost= '';
   optionSort: {property: string | null, order: string} = {property: null, order: 'asc'}
   @Input('showSearchControl') showSearchControl: boolean = true;  
-
-  constructor(      public dialog: MatDialog,
-    public snackBar: MatSnackBar ) { }
+  
+  constructor( public dialog: MatDialog,
+    public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
   openAdd(){
-    const dialogRef = this.dialog.open(AdminCursosPopupComponent,{
+    const dialogRef = this.dialog.open(AdminDocentePopupComponent,{
       width: this.width,
       height: this.height,        
     });
@@ -49,8 +50,8 @@ export class CursosComponent implements OnInit {
         console.log(this.optionSort)
       }
 
-      openEdit(nosotros: Cursos){
-        const dialogRef = this.dialog.open(AdminCursosPopupComponent,{
+      openEdit(nosotros: Docentes){
+        const dialogRef = this.dialog.open(AdminDocentePopupComponent,{
           width: this.width,
           data: nosotros
   
@@ -60,5 +61,6 @@ export class CursosComponent implements OnInit {
           // this.obtenerNosotros(); 
         });
         }
+        
 
 }
