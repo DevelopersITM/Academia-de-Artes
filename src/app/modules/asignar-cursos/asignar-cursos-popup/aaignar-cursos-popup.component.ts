@@ -31,7 +31,19 @@ export class AaignarCursosPopupComponent implements OnInit {
       ])],
       fechaInicio: ['', Validators.compose([
         Validators.maxLength(5000)
-])],
+      ])],
+      fechaFin: ['', Validators.compose([
+        Validators.maxLength(5000)
+      ])],
+      dias: ['', Validators.compose([
+        Validators.maxLength(5000)
+      ])],
+      horaInicio: ['', Validators.compose([
+        Validators.maxLength(5000)
+      ])],
+      horaFin: ['', Validators.compose([
+        Validators.maxLength(5000)
+      ])],
   });
 
   if(this.cursos !== null){
@@ -41,6 +53,10 @@ export class AaignarCursosPopupComponent implements OnInit {
       nombre: cursos.nombre,
       profesor: cursos.profesor,
       fechaInicio: cursos.fechaInicio,
+      fechaFin: cursos.fechaFin,
+      dias: cursos.dias,
+      horaInicio: cursos.horaInicio,
+      horaFin: cursos.horaFin,
     });
   }
 
