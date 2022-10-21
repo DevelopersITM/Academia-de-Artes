@@ -18,27 +18,27 @@ export class CursosComponent implements OnInit {
   constructor(      public dialog: MatDialog,
     public snackBar: MatSnackBar ) { }
 
-  ngOnInit(): void {
-  }
+        ngOnInit(): void {
+        }
 
-  openAdd(){
-    const dialogRef = this.dialog.open(AdminCursosPopupComponent,{
-      width: this.width,
-      height: this.height,        
-    });
-  
-  dialogRef.afterClosed().subscribe(result => {
-    // this.obtenerNosotros();
-  });
-  }
+        openAdd(){
+          const dialogRef = this.dialog.open(AdminCursosPopupComponent,{
+            width: this.width,
+            height: this.height,        
+          });
+        
+        dialogRef.afterClosed().subscribe(result => {
+          // this.obtenerNosotros();
+        });
+        }
 
-  // openAdd(){
+        // openAdd(){
 
-  // }
+        // }
 
-  clearSearch() {
-    this.filterPost= '';
-      }
+      clearSearch() {
+        this.filterPost= '';
+          }
 
       changeSort(property: string): void {
         const {order} = this.optionSort
