@@ -28,6 +28,9 @@ import { CursosMatriculadosComponent } from './modules/cursos-matriculados/curso
 import { PagosComponent } from './modules/pagos/pagos.component';
 import { HorariosComponent } from './modules/horarios/horarios.component';
 import { CursosHorariosComponent } from './modules/admin-docente/cursos-horarios/cursos-horarios.component';
+import { LoginComponent } from './modules/login/login.component';
+import { AdminInformesComponent } from './modules/admin-informes/admin-informes.component';
+import { CertificadosComponent } from './modules/certificados/certificados.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,9 @@ import { CursosHorariosComponent } from './modules/admin-docente/cursos-horarios
     PagosComponent,
     HorariosComponent,
     CursosHorariosComponent,
+    LoginComponent,
+    AdminInformesComponent,
+    CertificadosComponent,
     
   ],
   imports: [
