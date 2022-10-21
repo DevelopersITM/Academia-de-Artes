@@ -27,6 +27,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { CursosMatriculadosComponent } from './modules/cursos-matriculados/cursos-matriculados.component';
 import { PagosComponent } from './modules/pagos/pagos.component';
 import { HorariosComponent } from './modules/horarios/horarios.component';
+import { CursosHorariosComponent } from './modules/admin-docente/cursos-horarios/cursos-horarios.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { HorariosComponent } from './modules/horarios/horarios.component';
     CursosMatriculadosComponent,
     PagosComponent,
     HorariosComponent,
+    CursosHorariosComponent,
     
   ],
   imports: [
