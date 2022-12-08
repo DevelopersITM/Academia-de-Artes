@@ -42,17 +42,22 @@
   
     <table class="table table-striped table-primary">
       <thead>
-        <tr>
+        <!-- <tr>
           <th scope="col">#</th>
           <th scope="col">Tipo documento</th>
           <th scope="col">Nombre</th>
           <th scope="col">Apellido</th>
           <th scope="col">email</th>
           <th scope="col">Acciones</th>
-        </tr>
+        </tr> -->
+        <tr>
+          <th style="width: 5%;" class="text-center">#</th>
+           <th *ngFor="let f of fields" (click)="changeSort('f.display')">{{f.display}}</th>
+           <th style="width: 5%;" class="text-center">Acciones</th>
+          </tr>
       </thead>
       <tbody>
-        <tr>
+        <!-- <tr>
           <th scope="row">1</th>
           <td>CC</td>
           <td>Juan Gonzalez</td>
@@ -75,7 +80,38 @@
         </tr>
         <tr>
   
-        </tr>
+        </tr> -->
+
+        <tr *ngFor="let d of data | filterPipe: filterPost  | orderList:optionSort.property:optionSort.order ; let i = index">
+          <td class="text-center">{{1 + i}}</td>
+
+        <td *ngFor="let f of fields">
+          
+          <div *ngIf="f.link">
+              <div *ngIf="(f.formatter && f.formatter.length > 0)">
+              <a class="" (click)="openEdit(d)">
+                  <span [innerHtml]="">  {{d.nombre }}   </span><!--El datto 1 se lo pasamos a al pipe-->
+              </a>                
+              </div>
+            </div>
+              <div *ngIf="( f.name == 'tipoDocumento')">
+                <span class="text-navy" (click)="openEdit(d)">{{d.tipoDocumento}}</span>
+              </div>
+              <div *ngIf="( f.name == 'direccion')">
+                <span class="text-navy" (click)="openEdit(d)">{{d.direccion}}</span>
+              </div>
+              <div *ngIf="( f.name == 'apellido')">
+                <span class="text-navy" (click)="openEdit(d)">{{d.apellido}}</span>
+              </div>
+              <div *ngIf="( f.name == 'email')">
+                <span class="text-navy" (click)="openEdit(d)">{{d.email}}</span>
+              </div> 
+            </td>
+            <td> <button mat-raised-button class="bg-light" (click)="eliminarDocente(d.id)">
+              <i class="uils uil-trash-alt"></i>
+            </button></td>
+            </tr>
+        
       </tbody>
     </table>
   </div>

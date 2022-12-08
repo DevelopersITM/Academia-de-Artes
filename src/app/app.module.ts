@@ -31,7 +31,14 @@ import { CursosHorariosComponent } from './modules/admin-docente/cursos-horarios
 import { LoginComponent } from './modules/login/login.component';
 import { AdminInformesComponent } from './modules/admin-informes/admin-informes.component';
 import { CertificadosComponent } from './modules/certificados/certificados.component';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import { FilterPipePipe } from './shared/pipe/filter-pipe.pipe';
+import { OrderListPipe } from './shared/pipe/order-list.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,9 +60,12 @@ import { CertificadosComponent } from './modules/certificados/certificados.compo
     LoginComponent,
     AdminInformesComponent,
     CertificadosComponent,
+    FilterPipePipe,
+    OrderListPipe,
     
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -70,8 +80,15 @@ import { CertificadosComponent } from './modules/certificados/certificados.compo
     MatButtonModule,
     MatSnackBarModule,
     MatCardModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatDividerModule,
   ],
-  providers: [],
+  providers: [ 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
