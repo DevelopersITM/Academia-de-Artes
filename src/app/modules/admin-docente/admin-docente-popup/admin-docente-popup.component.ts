@@ -15,6 +15,7 @@ import { DocenteService } from '../services/docente.service';
 export class AdminDocentePopupComponent implements OnInit {
   formLogin: any; 
   id: number | undefined
+  ids: number | undefined
   accion ='Agregar';
   errors = errorMessages;
   data: Array<any> = [];
@@ -93,7 +94,7 @@ export class AdminDocentePopupComponent implements OnInit {
       CONTRASEÑA: this.formLogin.get('NUM_DOC')?.value,
       FECHA_INGRESO: this.formLogin.get('FECHA_INGRESO')?.value,
       ID_PERFIL: 1,
-      // ID_TERCERO: this.docente.id
+      ID_TERCERO: this.ids
     }
 
     console.log('😒❤️', docente);
@@ -111,6 +112,8 @@ addDocentes(docente: Docentes, usuario:Usuarios){
   this._docenteService.SaveDocentes(docente).subscribe(data => {
     // this.dialogRef.close();
     console.log('🎨🎨',data);
+    this.ids = data.insertId
+    console.log('🎨🎨s',this.ids);
     
     this.snackBar.open('El docente fue registrado con exito!','✌️',{
       duration: 2000,
@@ -118,13 +121,6 @@ addDocentes(docente: Docentes, usuario:Usuarios){
     });
     this.formLogin.reset();
 
-  //   this._docenteService.getDocentes().subscribe((Response:any[]) =>{
-  //     this.data = Response
-  //      console.log('😒😒', this.data); 
-  //   }, error => {
-  //     console.log(error);
-    
-  // })
   }
   , 
   error => {
@@ -137,24 +133,24 @@ addDocentes(docente: Docentes, usuario:Usuarios){
    }
    )
 
-  //  this._docenteService.Saveusuario(usuario).subscribe(data => {
-  //   // this.dialogRef.close();
-  //   this.snackBar.open('El usuario fue registrado con exito!','✌️',{
-  //     duration: 2000,
-  //     panelClass: ['blue-snackbar'],
-  //   });
-  //   this.formLogin.reset();
-  // }
-  // , 
-  // error => {
-  //   this.dialogRef.close();
-  //   this.snackBar.open('El usuario no pudo ser guardado correctamente, consulte con el administrador, consulte con el administrador','🔴🔴',{
-  //     duration: 2000,
-  //     panelClass: ['blue-snackbar'],
+   this._docenteService.Saveusuario(usuario).subscribe(data => {
+    // this.dialogRef.close();
+    this.snackBar.open('El usuario fue registrado con exito!','✌️',{
+      duration: 2000,
+      panelClass: ['blue-snackbar'],
+    });
+    this.formLogin.reset();
+  }
+  , 
+  error => {
+    this.dialogRef.close();
+    this.snackBar.open('El usuario no pudo ser guardado correctamente, consulte con el administrador, consulte con el administrador','🔴🔴',{
+      duration: 2000,
+      panelClass: ['blue-snackbar'],
 
-  //   });     
-  //  }
-  //  )
+    });     
+   }
+   )
 }
 
 editDocentes(docentes: Docentes){
