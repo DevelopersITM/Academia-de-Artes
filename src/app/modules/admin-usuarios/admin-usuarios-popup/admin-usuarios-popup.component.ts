@@ -37,10 +37,10 @@ export class AdminUsuariosPopupComponent implements OnInit {
   if(this.usuarios !== null){
     this.id= usuarios.id;
     this.formLogin.patchValue({
-      tipoDocumento: usuarios.tipoDocumento,
-      nombre: usuarios.nombre,
-      apellido: usuarios.apellido,
-      email: usuarios.email,
+      // tipoDocumento: usuarios.tipoDocumento,
+      // nombre: usuarios.nombre,
+      // apellido: usuarios.apellido,
+      // email: usuarios.email,
     });
   }
 

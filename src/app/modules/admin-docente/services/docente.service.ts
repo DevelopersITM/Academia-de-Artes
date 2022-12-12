@@ -14,12 +14,14 @@ const httpOption = {
     providedIn: 'root'
 })
 export class DocenteService {
-    private readonly URL = environment.api
+      private readonly URL = environment.api
+        
     constructor(private http: HttpClient) { }
 
-    getDocentes():Observable<Response>  {
-        return this.http.get<Response>(`${this.URL}/listar`)
+    getDocentes():Observable<any>  {
+        return this.http.get<any>(`${this.URL}/docentes/listar`)
     }
+    
     
     deleteDocentes(id:number): Observable<any>{
         return this.http.delete(`${this.URL}/usuarios/eliminar/` + id)
@@ -30,11 +32,11 @@ export class DocenteService {
     }
 
     SaveDocentes(docente: any): Observable<any> {
-        return this.http.post(`${this.URL}/usuario/`, docente)
+        return this.http.post(`${this.URL}/docentes/tercero`, docente)
       }
    
     Saveusuario(usuario: any): Observable<any> {
-    return this.http.post(`${this.URL}/tercero/`, usuario)
+    return this.http.post(`${this.URL}/docentes/usuario`, usuario)
     }
 
     updatedocente(id: number, usuario: any): Observable<Response>{

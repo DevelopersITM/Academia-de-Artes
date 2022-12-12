@@ -15,8 +15,10 @@ export class AdminDocenteComponent implements OnInit {
   readonly width: string = '800px';
   readonly height: string = '400px'; 
   filterPost= '';
+  tracksRandom: Array<Docentes> = []
+
   public fields: Array<any> =[];
-  @Input() data: Array<Docentes> = [];
+  @Input() data: Array<any> = [];
 
   optionSort: {property: string | null, order: string} = {property: null, order: 'asc'}
   @Input('showSearchControl') showSearchControl: boolean = true;  
@@ -41,7 +43,7 @@ export class AdminDocenteComponent implements OnInit {
           align: 1,
           link: true,
           allowSorting: true,
-          formatter: '1'
+          formatter: ''
       },
         {
           name: 'apellido',
@@ -49,7 +51,7 @@ export class AdminDocenteComponent implements OnInit {
           align: 1,
           link: true,
           allowSorting: true,
-          formatter: '1'
+          formatter: ''
       },
         {
             name: 'email',
@@ -63,17 +65,19 @@ export class AdminDocenteComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.getDocentes();
   }
 
 
-  getDocentes(){
+  getDocentes():void{
     this._docenteservice.getDocentes()
-    .subscribe(response => {
-       this.data = response.data;
+    .subscribe((Response:any[]) =>{
+      this.data = Response
+       console.log('😒😒', this.data);       
     }, error => {
       console.log(error);
-    }
-    )
+    
+  })
   }
 
   eliminarDocente(id: number ){
@@ -95,6 +99,18 @@ export class AdminDocenteComponent implements OnInit {
         duration: 2000
       });
     });
+
+    this._docenteservice.deleteUsuario(id).subscribe(data =>{
+      this.getDocentes();
+      this.snackBar.open('El usuario fue eliminada con éxito!','🤘',{
+       duration: 2000
+     });
+   }, error =>{
+     console.log(error)
+     this.snackBar.open('ERROR al intentar eliminar el docente, consulte con el administrador!','🔴🔴',{
+       duration: 2000
+     });
+   });
   }
   });
   

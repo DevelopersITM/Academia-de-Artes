@@ -39,6 +39,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import { FilterPipePipe } from './shared/pipe/filter-pipe.pipe';
 import { OrderListPipe } from './shared/pipe/order-list.pipe';
+import { DialogDeleteComponent } from './shared/components/popup-delete/dialogdelete.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { OrderListPipe } from './shared/pipe/order-list.pipe';
     CertificadosComponent,
     FilterPipePipe,
     OrderListPipe,
+    DialogDeleteComponent
     
   ],
   imports: [

@@ -3,6 +3,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Docentes } from 'src/app/core/models/docentes.model';
+import { Usuarios } from 'src/app/core/models/usuarios.model';
+import { errorMessages } from 'src/app/core/util/Validaciones.service';
+import { DocenteService } from '../services/docente.service';
 
 @Component({
   selector: 'app-admin-docente-popup',
@@ -13,46 +16,58 @@ export class AdminDocentePopupComponent implements OnInit {
   formLogin: any; 
   id: number | undefined
   accion ='Agregar';
+  errors = errorMessages;
+  data: Array<any> = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public docente: Docentes,
   public dialogRef: MatDialogRef<AdminDocentePopupComponent>,
+  private _docenteService: DocenteService,
   private fb: FormBuilder,
   public snackBar: MatSnackBar) { 
 
     this.formLogin = this.fb.group({
-      codtipoDocumentoigo: ['', Validators.compose([
+      NOMBRES: ['', Validators.compose([
         Validators.maxLength(40)
       ])],
-      nombre: ['', Validators.compose([
-        Validators.maxLength(40)
-      ])],
-      profesor: ['', Validators.compose([
+      APELLIDOS: ['', Validators.compose([
                         Validators.maxLength(5000)
       ])],
-      documento: ['', Validators.compose([
+      TIPO_DOC: ['', Validators.compose([
         Validators.maxLength(5000)
       ])],
-      telefono: ['', Validators.compose([
+      TELEFONO: ['', Validators.compose([
         Validators.maxLength(5000)
       ])],
-      celular: ['', Validators.compose([
+      NUM_DOC: ['', Validators.compose([
         Validators.maxLength(5000)
       ])],
-      email: ['', Validators.compose([
+      CELULAR: ['', Validators.compose([
         Validators.maxLength(5000)
       ])],
-      direccion: ['', Validators.compose([
+      DIRECCION: ['', Validators.compose([
+        Validators.maxLength(5000)
+      ])],
+      FECHA_INGRESO: ['', Validators.compose([
+        Validators.maxLength(5000)
+      ])],      
+      EMAIL: ['', Validators.compose([
         Validators.maxLength(5000)
       ])],
   });
 
+  console.log('', this.formLogin);
+  
   if(this.docente !== null){
     this.id= docente.id;
     this.formLogin.patchValue({
-      tipoDocumento: docente.tipoDocumento,
-      nombre: docente.nombre,
-      apellido: docente.apellido,
-      email: docente.email,
+      TIPO_DOC: docente.TIPO_DOC,
+      NOMBRES: docente.NOMBRES,
+      APELLIDOS: docente.APELLIDOS,
+      TELEFONO: docente.TELEFONO,
+      NUM_DOC: docente.NUM_DOC,
+      CELULAR: docente.CELULAR,
+      DIRECCION: docente.DIRECCION,
+      EMAIL: docente.EMAIL,
     });
   }
 
@@ -60,6 +75,114 @@ export class AdminDocentePopupComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  guardarDocentes(){
+    const docente: any = {
+      NOMBRES: this.formLogin.get('NOMBRES')?.value,
+      TIPO_DOC: this.formLogin.get('TIPO_DOC')?.value,
+      APELLIDOS: this.formLogin.get('APELLIDOS')?.value,
+      NUM_DOC: this.formLogin.get('NUM_DOC')?.value,
+      TELEFONO: this.formLogin.get('TELEFONO')?.value,
+      DIRECCION: this.formLogin.get('DIRECCION')?.value,
+      CELULAR: this.formLogin.get('CELULAR')?.value,
+      EMAIL: this.formLogin.get('EMAIL')?.value,
+    }
+
+    const usuario: any = {
+      INICIO_SESION: this.formLogin.get('EMAIL')?.value,
+      CONTRASEÑA: this.formLogin.get('NUM_DOC')?.value,
+      FECHA_INGRESO: this.formLogin.get('FECHA_INGRESO')?.value,
+      ID_PERFIL: 1,
+      // ID_TERCERO: this.docente.id
+    }
+
+    console.log('😒❤️', docente);
+    console.log('😒❤️', usuario);
+    
+    if(this.id == undefined){
+      this.addDocentes(docente, usuario);
+      } 
+      if(this.id !== undefined){
+       this.editDocentes(docente);
+      }  
+}
+
+addDocentes(docente: Docentes, usuario:Usuarios){
+  this._docenteService.SaveDocentes(docente).subscribe(data => {
+    // this.dialogRef.close();
+    console.log('🎨🎨',data);
+    
+    this.snackBar.open('El docente fue registrado con exito!','✌️',{
+      duration: 2000,
+      panelClass: ['blue-snackbar'],
+    });
+    this.formLogin.reset();
+
+  //   this._docenteService.getDocentes().subscribe((Response:any[]) =>{
+  //     this.data = Response
+  //      console.log('😒😒', this.data); 
+  //   }, error => {
+  //     console.log(error);
+    
+  // })
+  }
+  , 
+  error => {
+    this.dialogRef.close();
+    this.snackBar.open('El docente no pudo ser guardado correctamente, consulte con el administrador, consulte con el administrador','🔴🔴',{
+      duration: 2000,
+      panelClass: ['blue-snackbar'],
+
+    });     
+   }
+   )
+
+  //  this._docenteService.Saveusuario(usuario).subscribe(data => {
+  //   // this.dialogRef.close();
+  //   this.snackBar.open('El usuario fue registrado con exito!','✌️',{
+  //     duration: 2000,
+  //     panelClass: ['blue-snackbar'],
+  //   });
+  //   this.formLogin.reset();
+  // }
+  // , 
+  // error => {
+  //   this.dialogRef.close();
+  //   this.snackBar.open('El usuario no pudo ser guardado correctamente, consulte con el administrador, consulte con el administrador','🔴🔴',{
+  //     duration: 2000,
+  //     panelClass: ['blue-snackbar'],
+
+  //   });     
+  //  }
+  //  )
+}
+
+editDocentes(docentes: Docentes){
+this.id = this.docente.id;
+docentes.id = this.id;
+  this._docenteService.updatedocente(this.id, docentes).subscribe(data => {
+    
+    this.formLogin.reset();
+    this.accion = 'Editar';
+    this.id = undefined;
+    this.dialogRef.close();
+    this.snackBar.open('Se actualizo el docente correctamente','👌',{
+      duration: 2000,
+      verticalPosition: 'bottom',
+      panelClass: ['warning']
+    });
+    this.formLogin.reset();
+  }
+  , error => {
+    this.dialogRef.close();
+    this.snackBar.open('ERROR al intentar actualizar el docente, consulte con el administrador','🔴🔴',{
+      duration: 2000,
+      verticalPosition: 'bottom',
+      panelClass: ['warning']
+    });       
+   }
+   )
+}
 
   close() {
   

@@ -1,27 +1,27 @@
 <div class="section"> 
     <h1 mat-dialog-title>{{docente!= null ? 'Editar Usuario': 'Nuevo Usuario' }}</h1>
     <hr />
-    <form [formGroup]="formLogin" novalidate >
+    <form [formGroup]="formLogin" novalidate (ngSubmit)="guardarDocentes()">
     <div mat-dialog-content>
      <div class="row">
         <div class="col-sm-6 col-xs-12">    
         <mat-form-field class="input"  >
-            <input clas="input" type="text"  formControlName="tipoDocumento"  matInput placeholder="Tipo de documento" maxlength="40"> 
-           <!--  <mat-error *ngFor="let validation of errors.Requerido">
-               <mat-error class="error-message"
-               *ngIf="formLogin.get('descripcion').hasError(validation.type) && (formLogin.get('descripcion').dirty || formLogin.get('descripcion').touched)">
+            <input clas="input" type="text"  formControlName="TIPO_DOC"  matInput placeholder="Tipo de documento" maxlength="40"> 
+            <mat-error *ngFor="let validation of errors.Requerido">
+               <!-- <mat-error class="error-message"
+               *ngIf="formLogin.get('descripcion').hasError(validation.type) && (formLogin.get('TIPO_DOC').dirty || formLogin.get('TIPO_DOC').touched)">
                {{validation.message}}
-                   </mat-error>
-           </mat-error> -->
+                   </mat-error> -->
+           </mat-error>
        </mat-form-field>
     </div>
 
      <div class="col-sm-6 col-xs-12">    
         <mat-form-field class="input"  >
-             <input clas="input" type="text"  formControlName="nombre"  matInput placeholder="Nombre" maxlength="40"> 
-            <!--  <mat-error *ngFor="let validation of errors.Requerido">
+             <input clas="input" type="text"  formControlName="NOMBRES"  matInput placeholder="Nombre" maxlength="40"> 
+             <!-- <mat-error *ngFor="let validation of errors.Requerido">
                 <mat-error class="error-message"
-                *ngIf="formLogin.get('descripcion').hasError(validation.type) && (formLogin.get('descripcion').dirty || formLogin.get('descripcion').touched)">
+                *ngIf="formLogin.get('descripcion').hasError(validation.type) && (formLogin.get('NOMBRES').dirty || formLogin.get('NOMBRES').touched)">
                 {{validation.message}}
                     </mat-error>
             </mat-error> -->
@@ -29,10 +29,10 @@
     </div>
     <div class="col-sm-6 col-xs-12">    
         <mat-form-field class="input"  >
-            <input clas="input"  type="text"  formControlName="apellido"  matInput placeholder="apellido" maxlength="40">
+            <input clas="input"  type="text"  formControlName="APELLIDOS"  matInput placeholder="apellido" maxlength="40">
               <!-- <mat-error *ngFor="let validation of errors.Telefono">
                 <mat-error class="error-message"
-                *ngIf="formLogin.get('imagen').hasError(validation.type) && (formLogin.get('imagen').dirty || formLogin.get('imagen').touched)">
+                *ngIf="formLogin.get('imagen').hasError(validation.type) && (formLogin.get('APELLIDOS').dirty || formLogin.get('APELLIDOS').touched)">
                 {{validation.message}}
                     </mat-error>
             </mat-error> -->
@@ -40,10 +40,10 @@
     </div>
     <div class="col-sm-6 col-xs-12">    
         <mat-form-field class="input"  >
-            <input clas="input"  type="text"  formControlName="documento"  matInput placeholder="Documento" maxlength="40">
+            <input clas="input"  type="text"  formControlName="NUM_DOC"  matInput placeholder="Documento" maxlength="40">
               <!-- <mat-error *ngFor="let validation of errors.Telefono">
                 <mat-error class="error-message"
-                *ngIf="formLogin.get('imagen').hasError(validation.type) && (formLogin.get('imagen').dirty || formLogin.get('imagen').touched)">
+                *ngIf="formLogin.get('imagen').hasError(validation.type) && (formLogin.get('NUM_DOC').dirty || formLogin.get('NUM_DOC').touched)">
                 {{validation.message}}
                     </mat-error>
             </mat-error> -->
@@ -51,10 +51,10 @@
     </div>
     <div class="col-sm-6 col-xs-12">    
         <mat-form-field class="input"  >
-            <input clas="input"  type="text"  formControlName="telefono"  matInput placeholder="Teléfono" maxlength="40">
+            <input clas="input"  type="text"  formControlName="TELEFONO"  matInput placeholder="Teléfono" maxlength="40">
               <!-- <mat-error *ngFor="let validation of errors.Telefono">
                 <mat-error class="error-message"
-                *ngIf="formLogin.get('imagen').hasError(validation.type) && (formLogin.get('imagen').dirty || formLogin.get('imagen').touched)">
+                *ngIf="formLogin.get('imagen').hasError(validation.type) && (formLogin.get('TELEFONO').dirty || formLogin.get('TELEFONO').touched)">
                 {{validation.message}}
                     </mat-error>
             </mat-error> -->
@@ -62,10 +62,10 @@
     </div>
     <div class="col-sm-6 col-xs-12">    
         <mat-form-field class="input"  >
-            <input clas="input"  type="text"  formControlName="celular"  matInput placeholder="Celular" maxlength="40">
+            <input clas="input"  type="text"  formControlName="CELULAR"  matInput placeholder="Celular" maxlength="40">
               <!-- <mat-error *ngFor="let validation of errors.Telefono">
                 <mat-error class="error-message"
-                *ngIf="formLogin.get('imagen').hasError(validation.type) && (formLogin.get('imagen').dirty || formLogin.get('imagen').touched)">
+                *ngIf="formLogin.get('imagen').hasError(validation.type) && (formLogin.get('CELULAR').dirty || formLogin.get('CELULAR').touched)">
                 {{validation.message}}
                     </mat-error>
             </mat-error> -->
@@ -73,10 +73,21 @@
     </div>
     <div class="col-sm-6 col-xs-12">    
         <mat-form-field class="input"  >
-            <input clas="input" type="text"  formControlName="email"  matInput placeholder="email" maxlength="40">
+            <input clas="input" type="text"  formControlName="EMAIL"  matInput placeholder="email" maxlength="40">
+              <mat-error *ngFor="let validation of errors.email">
+                <!-- <mat-error class="error-message"
+                *ngIf="formLogin.get('imagen').hasError(validation.type) && (formLogin.get('EMAIL').dirty || formLogin.get('EMAIL').touched)">
+                {{validation.message}}
+                    </mat-error> -->
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="col-sm-6 col-xs-12">    
+        <mat-form-field class="input"  >
+            <input clas="input" type="text"  formControlName="DIRECCION"  matInput placeholder="Dirección" maxlength="40">
               <!-- <mat-error *ngFor="let validation of errors.Telefono">
                 <mat-error class="error-message"
-                *ngIf="formLogin.get('imagen').hasError(validation.type) && (formLogin.get('imagen').dirty || formLogin.get('imagen').touched)">
+                *ngIf="formLogin.get('imagen').hasError(validation.type) && (formLogin.get('DIRECCION').dirty || formLogin.get('DIRECCION').touched)">
                 {{validation.message}}
                     </mat-error>
             </mat-error> -->
@@ -84,15 +95,16 @@
     </div>
     <div class="col-sm-6 col-xs-12">    
         <mat-form-field class="input"  >
-            <input clas="input" type="text"  formControlName="direccion"  matInput placeholder="Dirección" maxlength="40">
+            <input clas="input" type="text"  formControlName="FECHA_INGRESO"  matInput placeholder="Fecha ingreso" maxlength="40">
               <!-- <mat-error *ngFor="let validation of errors.Telefono">
                 <mat-error class="error-message"
-                *ngIf="formLogin.get('imagen').hasError(validation.type) && (formLogin.get('imagen').dirty || formLogin.get('imagen').touched)">
+                *ngIf="formLogin.get('imagen').hasError(validation.type) && (formLogin.get('DIRECCION').dirty || formLogin.get('DIRECCION').touched)">
                 {{validation.message}}
                     </mat-error>
             </mat-error> -->
         </mat-form-field>
     </div>
+    
         </div>
     </div>
 

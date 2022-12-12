@@ -1,12 +1,13 @@
 export interface Docentes {
     id: number;
-    tipoDocumento: string;
-    nombre: string;
-    apellido: string;
-    documento: string;
-    telefono: string
-    celular: string
-    email: string
-    direccion: string
+    TIPO_DOC: string;
+    NOMBRES: string;
+    APELLIDOS: string;
+    TELEFONO: string;
+    NUM_DOC: string
+    CELULAR: string
+    EMAIL: string
+    DIRECCION: string
+    FECHA_INGRESO: string
 
 }

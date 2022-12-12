@@ -1,7 +1,9 @@
 export interface Usuarios {
     id: number;
-    tipoDocumento: string;
-    nombre: string;
-    apellido: string;
-    email: string
+    INICIO_SESION: string;
+    CONTRASEÑA: string;
+    FECHA_INGRESO: string;
+    ID_PERFIL: string;
+    ID_TERCERO: string;
+
 }
