@@ -90,17 +90,17 @@
               <div *ngIf="( f.name == 'tipoDocumento')">
                 <span class="text-navy" (click)="openEdit(d)">{{d.ID_USUARIO}}</span>
               </div>
-              <div *ngIf="( f.name == 'direccion')">
+              <div *ngIf="( f.name == 'ID_USUARIO')">
                 <span class="text-navy" (click)="openEdit(d)">{{d.ID_PERFIL}}</span>
               </div>
-              <div *ngIf="( f.name == 'apellido')">
+              <div *ngIf="( f.name == 'ID_TERCERO')">
                 <span class="text-navy" (click)="openEdit(d)">{{d.ID_TERCERO}}</span>
               </div>
               <div *ngIf="( f.name == 'email')">
                 <span class="text-navy" (click)="openEdit(d)">{{d.FECHA_INGRESO}}.</span>
               </div> 
             </td>
-            <td> <button mat-raised-button class="bg-light" (click)="eliminarDocente(d.id)">
+            <td> <button mat-raised-button class="bg-light" (click)="eliminarDocente(d.id, d.id)">
               <i class="uils uil-trash-alt"></i>
             </button></td>
             </tr>

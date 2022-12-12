@@ -31,23 +31,23 @@ export class AdminDocenteComponent implements OnInit {
       this.fields = [
         {
             name: 'nombre',
-            display: 'Nombre',
+            display: 'Usuario',
             align: 1,
             link: true,
             allowSorting: true,
             formatter: '1'
         },
         {
-          name: 'tipoDocumento',
-          display: 'Tipo de documento',
+          name: 'ID_USUARIO',
+          display: 'Id de usuario',
           align: 1,
           link: true,
           allowSorting: true,
           formatter: ''
       },
         {
-          name: 'apellido',
-          display: 'Apellido',
+          name: 'ID_TERCERO',
+          display: 'Id de tercero',
           align: 1,
           link: true,
           allowSorting: true,
@@ -55,7 +55,7 @@ export class AdminDocenteComponent implements OnInit {
       },
         {
             name: 'email',
-            display: 'Email',
+            display: 'Fecha de ingreso',
             align: 1,
             allowSorting: true,
             formatter: ''
@@ -80,7 +80,7 @@ export class AdminDocenteComponent implements OnInit {
   })
   }
 
-  eliminarDocente(id: number ){
+  eliminarDocente(id: number, id2:number ){
     const dialogRef = this.dialog.open(DialogDeleteComponent,{
       width: '500px',
     });
@@ -100,7 +100,7 @@ export class AdminDocenteComponent implements OnInit {
       });
     });
 
-    this._docenteservice.deleteUsuario(id).subscribe(data =>{
+    this._docenteservice.deleteUsuario(id2).subscribe(data =>{
       this.getDocentes();
       this.snackBar.open('El usuario fue eliminada con éxito!','🤘',{
        duration: 2000
